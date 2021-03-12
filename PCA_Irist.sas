@@ -1,9 +1,8 @@
 
 *-------------------------------------------------------------------------;
-* Project        :  BIA652  Mulivariate Analysis                          ;
-* Developer(s)   : Khasha Dehand                                          ;
-* Comments       :  Lecture Principal Component                            ;
-*                  Iris dataset                                           ;
+* Project        : Homework 01                                            ;
+* Developer(s)   : Yueyang Tao,10458455                                   ;
+* Comments       : PCA Iris dataset                                       ;
 *-------------------------------------------------------------------------;
 
 * initalize the data ;
@@ -23,18 +22,19 @@ proc sgplot data= iris ;
 run;
 
 *** Normalize the data ***;
-PROC STANDARD DATA=iris(keep= SepalLength species PetalWidth PetalLength)
+PROC STANDARD DATA=iris(keep= species  SepalLength  SepalWidth PetalLength PetalWidth)
               MEAN=0 STD=1 
-             OUT=iris_z(rename=(PetalWidth=PetalWidth_z PetalLength=PetalLength_z));
-  VAR  PetalWidth PetalLength ;
+             OUT=iris_z(rename=(SepalLength=SepalLength_z SepalWidth=SepalWidth_z  
+                      PetalLength=PetalLength_z PetalWidth=PetalWidth_z));
+  VAR  SepalLength  SepalWidth PetalWidth PetalLength ;
 RUN;
 
 
 *** calculate corrolations between variables ***;
 title "Principal Component Analysis"; 
 title2 " corrolation between variables"; 
-proc corr data=iris_z; 
-var PetalWidth_z PetalLength_z;
+proc corr data=iris_z cov; 
+var SepalLength_z SepalWidth_z PetalLength_z PetalWidth_z;
 run;
 
 title "Principal Component Analysis"; 
@@ -50,7 +50,7 @@ title2 " ";
 
 
 
-proc princomp   data=iris_z ;
+proc princomp   data=iris_z  out=iris_pca_out;
    var  PetalWidth_z  PetalLength_z  ;
 run;
 
@@ -109,4 +109,10 @@ run;
 ods graphics off;
 
 
+libname sasdata "O:\CS-593\mysasdata";
+run;
+
+proc copy in=work out=sasdata;
+  select  pca_petal ;
+run;
 
