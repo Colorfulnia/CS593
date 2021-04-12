@@ -9,7 +9,7 @@
 
 
 data baseball;
-set 'C:\Users\Hamid\Downloads\baseball.sas7bdat';
+set 'O:\CS-561\Midterm\baseball.sas7bdat';
 run;
 
 data base1(drop=firstname lastname team);
