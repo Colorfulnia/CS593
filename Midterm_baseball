@@ -1,0 +1,100 @@
+*-------------------------------------------------------------------------;
+* Project        : CS593 Midterm                                          ;
+* Developer(s)   : Yueyang Tao                                            ;
+* Comments       : Soluition to Midterm Question #1～3                    ;
+*                                                                         ;
+*-------------------------------------------------------------------------;
+
+/** Question 1 **/
+
+
+data baseball;
+set 'C:\Users\Hamid\Downloads\baseball.sas7bdat';
+run;
+
+data base1(drop=firstname lastname team);
+set baseball;
+run;
+
+proc corr data=base1  cov; 
+var  RBIs age at_bats bat_ave on_base_pct caught_stealing doubles games hits homeruns
+             runs slugging_pct stolen_bases strikeouts triples walks ;
+run;
+
+PROC STANDARD DATA= base1
+                     MEAN=0 STD=1 OUT=base_z ;
+  VAR   RBIs age at_bats bat_ave on_base_pct caught_stealing doubles games hits homeruns
+             runs slugging_pct stolen_bases strikeouts triples walks;
+RUN;
+proc princomp   data=base_z   out=base_pca;
+   var  RBIs age at_bats bat_ave on_base_pct caught_stealing doubles games hits homeruns
+             runs slugging_pct stolen_bases strikeouts triples walks;  
+run;
+
+proc corr data=base_pca;
+var      prin1 prin2 prin3 prin4 prin5 prin6 prin7 prin8 prin10 prin9 prin11 prin12 prin13 prin14 prin15 prin16;
+run;
+
+/** Question 2 **/
+
+proc iml;
+ use base1;
+ read all var{RBIs age at_bats bat_ave on_base_pct caught_stealing doubles games hits homeruns
+             runs slugging_pct stolen_bases strikeouts triples walks
+       } into M;
+ print M;
+ 
+ Mu=mean(M[:,]); print Mu;
+ Mctr=M-Mu; Print Mctr;
+ SSMctr=t(Mctr)*Mctr; print SSMctr;
+ n=nrow(M); print n;
+  varcovar=SSMctr*1/(n-1);print varcovar;
+ 
+ var=diag(varcovar);print var;
+ std=sqrt(var);print std;
+ std_1=inv(std); print std_1;
+ M_z=Mctr*std_1; print M_z;
+ corr=t(std_1)*varcovar*std_1 ;print  corr;
+ evals=eigval(corr );print evals;
+ evecs=eigvec(corr );print evecs;
+ ort_test=t(evecs)*evecs;print ort_test;
+
+ NewCols=M_z* evecs; Print NewCols;
+
+ create Newdata from NewCols;
+ append from  NewCols;
+ close Newdata;
+ quit;
+
+/** Question 3 **/
+
+PROC SQL;
+   CREATE TABLE QUERY_FOR_BASE1 AS 
+   SELECT t1.age, 
+          t1.games, 
+          t1.at_bats, 
+          t1.runs, 
+          t1.hits, 
+          t1.doubles, 
+          t1.triples, 
+          t1.homeruns, 
+          t1.RBIs, 
+          t1.walks, 
+          t1.strikeouts, 
+          t1.bat_ave, 
+          t1.on_base_pct, 
+          t1.slugging_pct, 
+          t1.stolen_bases, 
+          t1.caught_stealing
+      FROM BASE1 t1
+
+      WHERE t1.at_bats >= 100;
+QUIT;
+
+PROC REG DATA= QUERY_FOR_BASE1		PLOTS(ONLY)=ALL
+	;
+	Linear_Regression_Model: MODEL caught_stealing = stolen_bases
+		/		SELECTION=NONE
+	;
+RUN;
+QUIT;
