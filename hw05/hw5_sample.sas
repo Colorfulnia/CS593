@@ -1,3 +1,10 @@
+/*****************
+*Using the depression dataset, perform logistic regression, use age, sex, log(income), bed days and health as possible variables to predict depression.
+*A person is considered depressed when Cat_total>=16;
+*使用抑郁数据集，进行逻辑回归，使用年龄，性别，对数（收入），就寝天数和健康状况作为预测抑郁的可能变量。
+*当Cat_total> = 16时，一个人被认为是沮丧的。
+*****************/
+
 data depression_v2;
   set depression;
   if Cat_total>=16 then depressed=1;
