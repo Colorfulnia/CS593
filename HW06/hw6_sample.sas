@@ -5,6 +5,8 @@
 *Description: 
 *
 *I pledge my honor that I have abided by the Stevens Honor System.  
+*Calculate the Jaccard and cosine similarities for the recipes in the “Recipe.csv” file.
+*计算“ Recipe.csv”文件中配方的Jaccard和余弦相似度。
 *******************************************************************/
 
 libname sasdata "/folders/myfolders/sasuser.v94/SAS_data/";
