@@ -7,7 +7,7 @@ run;
 
 proc iml;
 use recipes;
-read a;; var{
+read all var{
 
 } into M;
 close;
