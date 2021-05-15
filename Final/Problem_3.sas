@@ -4,7 +4,7 @@
 * Comments       :  Solution for the Problem 3                            ;
 *-------------------------------------------------------------------------;
 
-libname sasdata "/folders/myfolders/sasuser.v94/SAS_data/";
+libname sasdata "O:\CS-593\SAS_data";
 
 proc copy in=sasdata out=work;
     select admission;
