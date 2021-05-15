@@ -1,11 +1,11 @@
 
 
 /****************************************************************** 
-• First: Khasha   
-• Last Name : Dehnad   
-• Variance Covariance in SAS/IML  
-• Version 2 
-•   
+â€¢ First: Khasha   
+â€¢ Last Name : Dehnad   
+â€¢ Variance Covariance in SAS/IML  
+â€¢ Version 2 
+â€¢   
  ******************************************************************/
 
 
