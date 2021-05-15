@@ -4,6 +4,8 @@
 * Comments       :  Solution for the Problem 1                            ;
 *-------------------------------------------------------------------------;
 
+libname sasdata "O:\CS-593\SAS_data";
+
 proc copy in=sasdata out=work;
    select  baseball_100 ;
 run;
