@@ -1,9 +1,9 @@
 /****************************************************************** 
-• First Name 
-• Last Name   
-• First SAS program  
-• Student Version 1   
-•   
+â€¢ First Name 
+â€¢ Last Name   
+â€¢ First SAS program  
+â€¢ Student Version 1   
+â€¢   
  ******************************************************************/
 
  
