@@ -1,8 +1,8 @@
 proc import out= work.recipes
-datafile= ""
+DATAFILE= ""
 DBMS=CSV REPLACE;
-getnames=yes;
-datarow=2;
+GETNAMES=yes;
+DATAROW=2;
 run;
 
 proc iml;
