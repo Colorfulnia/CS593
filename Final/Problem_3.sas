@@ -1,7 +1,7 @@
 *-------------------------------------------------------------------------;
 * Project        :  CS593-Data Mining II Final Exam                       ;
 * Developer(s)   :  Yueyang Tao, 10458455                                 ;
-* Comments       :  Solution for the Problem 2                            ;
+* Comments       :  Solution for the Problem 3                            ;
 *-------------------------------------------------------------------------;
 
 libname sasdata "/folders/myfolders/sasuser.v94/SAS_data/";
