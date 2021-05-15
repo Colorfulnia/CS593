@@ -1,14 +1,14 @@
-proc import out= work.recipes
-DATAFILE= ""
-DBMS=CSV REPLACE;
+proc import out= work.admission
+DATAFILE= "O:\CS-593\Raw_data"
+DBMS=CSV admission;
 GETNAMES=yes;
 DATAROW=2;
 run;
 
 proc iml;
-use recipes;
+use admission;
 read all var{
-
+Article1 Article2 Article3 Article4
 } into M;
 close;
 print M;
@@ -43,16 +43,16 @@ print jaccard;
 print Distance;
 quit;
 
-proc distance data=RECIPES out=Cos_out method=COSINE shape=square;
+proc distance data=admission out=Cos_out method=COSINE shape=square;
 var ratio (
-
+Article1 Article2 Article3 Article4
 );
-id RECIPE;
+id adission;
 run;
 
-proc distance data=RECIPES out=distjacc_out method=djaccard absent=0 shape=square;
+proc distance data=admission out=distjacc_out method=djaccard absent=0 shape=square;
 var anominal(
-
+Article1 Article2 Article3 Article4
 );
-id RECIPE;;
+id admission;;
 run;
