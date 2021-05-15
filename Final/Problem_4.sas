@@ -5,6 +5,43 @@ GETNAMES=yes;
 DATAROW=2;
 run;
 
+
+/*
+data admission;
+infile datalines;
+input Costomer_ID $ Article1 Article2 Article3 Article4	;
+*rating=rating*.20;
+datalines;
+A	0	1	0	1
+B	0	1	1	1
+C	1	0	1	0
+D	1	0	0	1
+E 1 0 0 0
+;
+run;
+
+proc iml;
+ use  admission ;
+  read all var{Article1 Article2 Article3 Article4} into M;
+  print M;
+  jaccard = j(4, 4, 0); print Jaccard;
+  inter=t(M[,1])* M[,2]; print inter;
+   add= M[,1]+M[,2]; print add;
+   union=add[+,];print union;
+   jaccard[1,2]=inter/(union-inter); print jaccard; 
+
+  do i=1 to 4; 
+    do j=1 to 4; 
+      inter=t(M[,i])* M[,j];  
+      add= M[,i]+M[,j];
+      union=add[+,]; 
+     jaccard[i,j]=inter/(union-inter); 
+	end;
+  end;
+  print jaccard;
+  quit;
+*/
+
 proc iml;
 use admission;
 read all var{
