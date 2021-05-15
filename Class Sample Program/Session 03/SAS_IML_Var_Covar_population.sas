@@ -1,9 +1,9 @@
 /****************************************************************** 
-• First: Khasha   
-• Last Name : Dehnad   
-• Variance Covariance in SAS/IML  
-• SAS_IML_covar 
-•   
+â€¢ First: Khasha   
+â€¢ Last Name : Dehnad   
+â€¢ Variance Covariance in SAS/IML  
+â€¢ SAS_IML_covar 
+â€¢   
  ******************************************************************/
 
 PROC IMPORT OUT= WORK.covar_insurance 
