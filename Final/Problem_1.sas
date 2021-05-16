@@ -18,7 +18,7 @@ run;
       numerical variables in the data set
 */
 data baseball2;
-  set baseball;
+  set baseball_100;
   if at_bats <100 then delete;
 run;
 
