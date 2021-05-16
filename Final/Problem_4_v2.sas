@@ -80,7 +80,7 @@ run;*/
  close;
  print M;
 
- dotM = j(nrow(m), nrow(m)-1, 0); print dotM  ;
+ dotM = j(nrow(m)-1, nrow(m)-1, 0); print dotM  ;
  temp=M[1,]*t(M[1,])/(norm(M[1,]) *norm(M[1,]));
  print temp;
 
