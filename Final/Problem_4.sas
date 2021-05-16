@@ -12,10 +12,10 @@ run;*/
 
 proc import out= work.admission
 DATAFILE= "O:\CS-593\Raw_data\admission.csv"
-DBMS=CSV admission;
+/*DBMS=CSV admission;
 GETNAMES=yes;
 DATAROW=2;
-run;
+run;*/
 
 data admission;
 infile datalines;
@@ -49,7 +49,7 @@ proc iml;
   print jaccard;
   quit;
 
-
+/*
 proc iml;
 use admission;
 read all var{
@@ -88,6 +88,9 @@ print jaccard;
 print Distance;
 quit;
 
+*/
+
+/*
 proc distance data=admission out=Cos_out method=COSINE shape=square;
 var ratio (
 Article1 Article2 Article3 Article4
@@ -101,3 +104,82 @@ Article1 Article2 Article3 Article4
 );
 id admission;;
 run;
+*/
+
+**** Cosine  ****;
+
+data admission;
+length article $1;
+input article x y;
+datalines;
+A  0 1 0 1
+B  0 1 1 1
+C  1 0 1 0
+D  1 0 0 1
+E  1 0 0 0
+;
+run;
+ 
+ 
+ 
+proc sgplot data=admission aspect=1;
+   vector x=x y=y / datalabel=Article datalabelattrs=(size=14);
+   xaxis grid;  yaxis grid;
+run;
+
+proc distance data=admission out=Cos method=COSINE shape=square;
+   var  ratio(x y);
+   id Article;
+run;
+
+   proc iml;
+ use  admission;
+ read all var{x y} into M;
+ close;
+ print M;
+
+
+
+ 
+   proc iml;
+ use  admission;
+ read all var{x y} into M;
+ close;
+ print M;
+ dotM = j(nrow(m), nrow(m), 0); print dotM  ;
+ temp=M[1,]*t(M[2,])/(norm(M[1,]) *norm(M[2,]) );
+  print temp;
+
+
+ do i=1 to nrow(M);
+  do j=1 to nrow(M);
+       dotM[i,j]=M[i,]*t(M[j,])/(norm(M[i,]) *norm(M[j,]) ); 
+  end;
+ end; 
+ print dotM ; 
+
+
+
+
+
+
+ /*
+ size = j(nrow(m),1, 0);print size;
+ do i=1 to nrow(M);
+    normM=norm(M[i,]);
+	size[i,1]=normM;
+   print normm;
+ end;
+ print size;
+*/
+ dotM = j(nrow(m), nrow(m), 0); print dotM  ;
+ do i=1 to nrow(M);
+  do j=1 to nrow(M);
+    *dot=M[i,]*t(M[j,]);*print dot;
+     *normij=norm(M[i,]) *norm(M[j,]);
+	 *print normij;
+    dotM[i,j]=M[i,]*t(M[j,])/(norm(M[i,]) *norm(M[j,]) ); 
+  end;
+ end; 
+ print dotM ; 
+ quit;
