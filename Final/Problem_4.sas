@@ -4,15 +4,19 @@
 * Comments       :  Solution for the Problem 4                            ;
 *-------------------------------------------------------------------------;
 
+/*libname sasdata "O:\CS-593\SAS_data";
+
+proc copy in=sasdata out=work;
+    select admission;
+run;*/
+
 proc import out= work.admission
-DATAFILE= "O:\CS-593\Raw_data"
+DATAFILE= "O:\CS-593\Raw_data\admission.csv"
 DBMS=CSV admission;
 GETNAMES=yes;
 DATAROW=2;
 run;
 
-
-/*
 data admission;
 infile datalines;
 input Costomer_ID $ Article1 Article2 Article3 Article4	;
@@ -25,7 +29,6 @@ D	1	0	0	1
 E	1	0	0	0
 ;
 run;
-
 proc iml;
  use  admission ;
   read all var{Article1 Article2 Article3 Article4} into M;
@@ -35,7 +38,6 @@ proc iml;
    add= M[,1]+M[,2]; print add;
    union=add[+,];print union;
    jaccard[1,2]=inter/(union-inter); print jaccard; 
-
   do i=1 to 4; 
     do j=1 to 4; 
       inter=t(M[,i])* M[,j];  
@@ -46,7 +48,7 @@ proc iml;
   end;
   print jaccard;
   quit;
-*/
+
 
 proc iml;
 use admission;
